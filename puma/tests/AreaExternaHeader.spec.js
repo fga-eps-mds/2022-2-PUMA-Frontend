@@ -8,15 +8,8 @@ describe('Testando criação do componente "AreaExternaHeader"', () => {
   });
 });
 
-describe('Testando data() return', () => {
-  it('data() return', () => {
-    const wrapper = shallowMount(AreaExternaHeader);
-    expect(wrapper.vm.dispMenu).toBe(false);
-  })
-});
-
 describe('Testando Função "getDispMenu()" e  "setDispMenu()"', () => {
-  it('Get and Set functions', () => {
+  it('Renderizando componente', () => {
     const wrapper = shallowMount(AreaExternaHeader);
     expect(wrapper.vm.getDispMenu()).toBe(false);
     wrapper.vm.setDispMenu(true);
