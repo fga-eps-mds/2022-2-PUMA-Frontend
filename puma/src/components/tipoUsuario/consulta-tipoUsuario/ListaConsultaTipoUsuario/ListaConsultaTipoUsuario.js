@@ -8,6 +8,7 @@ export default {
   data: () => ({
     listUserTypes: [],
     userService: new UserService(),
+    isLoading: false,
   }),
 
   async mounted() {
@@ -20,11 +21,18 @@ export default {
 
   methods: {
     async getData() {
+      this.isLoading = true;
       this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.userService.getUserType().then(async (response) => {
-        this.listUserTypes = response.data;
+      try {
+        this.userService.getUserType().then(async (response) => {
+          this.listUserTypes = response.data;
+        });
+        this.isLoading = false;
         this.$store.commit('CLOSE_LOADING_MODAL');
-      });
+      } catch (error) {
+        this.isLoading = false;
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }
     },
     goToEditar(typeName) {
       this.$router.push({ path: `/tipoUsuario/editar/${typeName}` }).catch(() => { });

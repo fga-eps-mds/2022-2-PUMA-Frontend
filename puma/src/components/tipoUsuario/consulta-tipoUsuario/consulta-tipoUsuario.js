@@ -10,7 +10,6 @@ export default {
   },
 
   data: () => ({
-    isLoading: false,
     userTypes: [],
   }),
 

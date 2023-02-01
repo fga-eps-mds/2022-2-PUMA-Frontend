@@ -31,8 +31,7 @@ export default {
     async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();
-        const isMultiselectValid = this.validateMultiselects();
-        if (isFormValid && isMultiselectValid) {
+        if (isFormValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const userType = {
             userTypeId: this.userTypeId,
