@@ -19,12 +19,14 @@ export default {
     };
   },
   async mounted() {
-    try {
-      this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.getUserType(this.userTypeId);
-      this.$store.commit('CLOSE_LOADING_MODAL');
-    } catch (error) {
-      this.$store.commit('CLOSE_LOADING_MODAL');
+    if (this.operacao === 'editar') {
+      try {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+        this.getUserType(this.userTypeId);
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }
     }
   },
   methods: {
