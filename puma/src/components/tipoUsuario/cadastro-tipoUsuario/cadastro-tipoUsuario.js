@@ -19,20 +19,21 @@ export default {
     };
   },
   async mounted() {
-    try {
-      this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
-      this.getUserType(this.userTypeId);
-      this.$store.commit('CLOSE_LOADING_MODAL');
-    } catch (error) {
-      this.$store.commit('CLOSE_LOADING_MODAL');
+    if (this.operacao === 'editar') {
+      try {
+        this.$store.commit('OPEN_LOADING_MODAL', { title: 'Carregando...' });
+        this.getUserType(this.userTypeId);
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      } catch (error) {
+        this.$store.commit('CLOSE_LOADING_MODAL');
+      }
     }
   },
   methods: {
     async onSubmit() {
       try {
         const isFormValid = await this.$refs.observer.validate();
-        const isMultiselectValid = this.validateMultiselects();
-        if (isFormValid && isMultiselectValid) {
+        if (isFormValid) {
           this.$store.commit('OPEN_LOADING_MODAL', { title: 'Enviando...' });
           const userType = {
             userTypeId: this.userTypeId,
